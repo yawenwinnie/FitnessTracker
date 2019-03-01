@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 
 import { AuthService } from '../auth.service';
 import { UIService } from 'src/app/shared/ui.service';
-import * as fromApp from '../../app.reducer';
+import * as fromRoot from '../../app.reducer';
 
 @Component({
   selector: 'app-login',
@@ -21,15 +21,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private uiService: UIService,
-    private store: Store<{ui: fromApp.State}>
+    private store: Store<fromRoot.State>
     ) {}
 
   ngOnInit() {
-    this.isloading$ = this.store.map(state => state.ui.isLoading);
-
-    // this.loadingSubs = this.uiService.loadingStateChange.subscribe(isLoading => {
-    //   this.isloading = isLoading;
-    // });
+    this.isloading$ = this.store.select(fromRoot.getIsLoading);
 
     this.loginForm = new FormGroup({
       email: new FormControl('', {

@@ -18,7 +18,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { TrainingService } from './training/training.service';
 import { UIService } from './shared/ui.service';
 import { AuthModule } from './auth/auth.module';
-import { appReducer } from './app.reducer';
+import { reducers } from './app.reducer';
 
 @NgModule({
   declarations: [
@@ -36,9 +36,7 @@ import { appReducer } from './app.reducer';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AuthModule,
-    StoreModule.forRoot( {
-      ui: appReducer
-    })
+    StoreModule.forRoot( reducers)
   ],
   providers: [
     AuthService,
